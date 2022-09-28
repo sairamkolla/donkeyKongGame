@@ -22,16 +22,16 @@ class missiles(basic):
         return
     def update(self,screen,mario,ladder_array,floor_mainarray):
         if self.alive==1:
-        #print 'entered %d %d ' %(self.x,self.y)
-            #print 'entered %d %d ' %(self.width,self.height)
+        #print('entered %d %d ' %(self.x,self.y))
+            #print('entered %d %d ' %(self.width,self.height))
         #if self.direction==RIGHT:
-        #    print 'RIGHT'
+        #    print('RIGHT')
             if self.x <border_width:
-                #print 'collision in the left'
+                #print('collision in the left')
                 self.x=border_width
                 self.direction=RIGHT
             elif self.x > screen_width-border_width:
-                #print 'collision in the right'
+                #print('collision in the right')
                 self.x=screen_width-border_width
                 self.direction=LEFT
             if self.rect.colliderect(mario) and self.alive==1:
@@ -54,31 +54,31 @@ class missiles(basic):
             #self.adjust_irregularities(floor_mainarray)
             if self.direction==LEFT or self.direction==RIGHT:
                 #if self.direction==RIGHT:
-                #    print 'RIGHT'
+                #    print('RIGHT')
                 self.ladder_set(ladder_array)
                 if self.ladderdown==1:
                     rand1=randint(0,923479)
 
                     #rand1=0
-                    #print 'have a ladder chance'
+                    #print('have a ladder chance')
 
                     if rand1%2:
-                        #print 'will move down in next iteration'
+                        #print('will move down in next iteration')
                         self.direction=DOWN
                         #self.y+=self.speedy
                         self.adjust_irregularities(floor_mainarray)
                     else:
-                        #print 'moving right'
+                        #print('moving right')
                         self.x+=(self.direction*self.speedx)
                 else:
-                    #print 'moving right'
+                    #print('moving right')
                     self.x+=(self.direction*self.speedx)
             elif self.direction==DOWN:
-                #print 'going down'
+                #print('going down')
                 self.y+=5
                 #self.y+=self.speedy
                 self.adjust_irregularities(floor_mainarray)
-            #print 'exited %d %d ' %(self.x,self.y)
+            #print('exited %d %d ' %(self.x,self.y))
         return
     def check_on_the_floor(self,floor_mainarray):
         flag=0
@@ -91,12 +91,12 @@ class missiles(basic):
         return
     def adjust_irregularities(self,floor_mainarray):
         for floor in floor_mainarray:
-            #print floor[1]-self.y-self.height
+            #print(floor[1]-self.y-self.height)
             #if floor[1]-(self.y+self.height-1) <=self.speedy and floor[1]-self.y-self.height>1 :#and self.x > floor[0] and self.x < floor[0]+floor[2]: #and floor[1]-self.y-self.height >=0:
             if floor[1]-(self.y+self.height-1) <=5 and floor[1]-self.y-self.height>1 :#and self.x > floor[0] and self.x < floor[0]+floor[2]: #and floor[1]-self.y-self.height >=0:
-                    #print 'done'
+                    #print('done')
 
-                #print 'something adjusted'
+                #print('something adjusted')
                 self.y=floor[1]-self.height+1
                 if self.direction==DOWN:
                     #self.direction=RIGHT
@@ -104,19 +104,19 @@ class missiles(basic):
                 break
         return
     def ladder_set(self,ladder_array):
-        #print 'this function is called'
+        #print('this function is called')
         for ladder in ladder_array:
             if self.x >=ladder[0] and self.x + self.width <=ladder[0] +ladder[2] and self.y+self.height -1 < ladder[1]+ladder[3]-1 and  self.y+self.height >= ladder[1]:
                 #self.ladder=1
                 self.ladderdown=1
-                #print self.direction
-                #print 'yes!!'
+                #print(self.direction)
+                #print('yes!!')
                 break
             else:
-                #print 'no'
+                #print('no')
                 self.ladder=0
                 self.ladderdown=0
-        #print 'bye bye'
+        #print('bye bye')
         return
 class donkey_kong(basic):
     def __init__(self,x,y,w,h):
@@ -127,24 +127,24 @@ class donkey_kong(basic):
         self.speedx=randint(1,3)
         return
     def fireballs(self,screen,mario,ladder_array,floor_mainarray):
-        #print len(self.firearray)
+        #print(len(self.firearray))
         if self.count==100:
             self.count=0
             self.firearray.insert(0,missiles(self.x,self.y+100-14,15,15))
-            #print 'new ball created'
+            #print('new ball created')
         self.count+=1
         for fireball in self.firearray:
             fireball.update(screen,mario,ladder_array,floor_mainarray)
-            #print 'done'
+            #print('done')
         return
     def update(self):
         self.rect=pygame.Rect(self.x,self.y,self.width,self.height)
         if self.x <border_width:
-            #print 'collision in the left'
+            #print('collision in the left')
             self.x=border_width
             self.direction=RIGHT
         elif self.x > screen_width-self.width-border_width:
-            #print 'collision in the right'
+            #print('collision in the right')
             self.x=screen_width-self.width-border_width
             self.direction=LEFT
         self.x+=(self.direction*randint(0,10))#self.speedx)

@@ -84,7 +84,7 @@ class control:
                 mario.dy=0
                 mario.sucess=0
                 mario.rect=pygame.Rect(30,900,25,39)
-                print 'barre champindhi'
+                print('barre champindhi')
 
             donkey.update()
             screen.blit(donkey_img,(donkey.x,donkey.y))
@@ -102,7 +102,7 @@ class control:
         self.rect=pygame.Rect(30,161,25,39)
         screen.blit(princess_img,(30,161))
         if self.rect.colliderect(mario.rect):
-            print 'devuda please.......'
+            print('devuda please.......')
             mario.success=1
 class lives:
     def __init__(self,x,y):

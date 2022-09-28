@@ -30,17 +30,17 @@ class player:
         self.success=0
         return
     def update(self,screen,border_array,floor_mainarray,ladder_array,screen_width):
-        #print '%d %d' %(self.x,self.y)
+        #print('%d %d' %(self.x,self.y))
         self.rect=pygame.Rect(self.x,self.y,self.width,self.height)
         self.ladder_set(ladder_array)
-        #print self.jumpcount
-        #print 'jumpcount is %d and dy is %d and on_the_floor is %d ' %(self.jumpcount,self.dy,self.on_the_floor)
+        #print(self.jumpcount)
+        #print('jumpcount is %d and dy is %d and on_the_floor is %d ' %(self.jumpcount,self.dy,self.on_the_floor))
         if not self.dy==0:
-            #print self.dy
-            #print 'hola'
-            #print 'mario not inside ladder'
+            #print(self.dy)
+            #print('hola')
+            #print('mario not inside ladder')
             if self.dy > 0:
-                #print 'mario going down'
+                #print('mario going down')
                 if self.jumpcount==10:
                     self.dy=0
                     self.check_on_the_floor(floor_mainarray)
@@ -50,23 +50,23 @@ class player:
                     self.jumpcount+=1
             elif self.dy <0:
                 if self.jumpcount==10:
-                    #print 'reached maximum height'
+                    #print('reached maximum height')
                     self.jumpcount=0
                     self.dy = -self.dy
                 else:
-                    #print 'going down'
+                    #print('going down')
                     self.y-=5
                     self.jumpcount+=1
             self.adjust_irregularities(floor_mainarray)
         if self.on_the_floor==0 and self.ladder==0 and self.dy==0:
-            #print 'we are doing the shit floor=%d dy=%d' %(self.on_the_floor,self.dy)
+            #print('we are doing the shit floor=%d dy=%d' %(self.on_the_floor,self.dy))
             self.y+=5
             self.check_on_the_floor(floor_mainarray)
         for wall in border_array:
             if self.rect.colliderect(wall) and (wall[0]==0 or wall[0] >= screen_width-border_width):
-                #print wall
+                #print(wall)
                 self.x=wall[0]-self.width if not wall[0]==0 else wall[0]+border_width
-                #print 'collision happening'
+                #print('collision happening')
                 break
         self.rect=pygame.Rect(self.x,self.y,self.width,self.height)
         if self.running:
@@ -79,8 +79,8 @@ class player:
         if 1:
             for floor in floor_mainarray:
                 if abs(floor[1]-self.y-self.height) < 5 and not floor[1]-self.y-self.height==0 and self.x > floor[0] and self.x < floor[0]+floor[2]: #and floor[1]-self.y-self.height >=0:
-                    #print 'done'
-                    #print 'something adjusted'
+                    #print('done')
+                    #print('something adjusted')
                     self.y=floor[1]-self.height
                     self.on_the_floor=1
                     self.dy=0
@@ -100,12 +100,12 @@ class player:
             if self.x >= ladder[0] and self.x+self.width <= ladder[0] + ladder[2] and self.y+self.height <= ladder[1]+ladder[3] and not ladder[1] >= self.y+self.height:
                 self.ladder=1
                 self.ladderup=1
-                #print 'ladder is 1 and up'
+                #print('ladder is 1 and up')
                 break
             elif self.x >=ladder[0] and self.x + self.width <=ladder[0] +ladder[2] and self.y+self.height < ladder[1]+ladder[3] and  self.y+self.height >= ladder[1]:
                 self.ladder=1
                 self.ladderdown=1
-                #print 'ladder is 1 and down'
+                #print('ladder is 1 and down')
                 break
             else:
                 self.ladder=0

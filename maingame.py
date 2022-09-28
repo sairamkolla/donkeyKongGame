@@ -34,7 +34,7 @@ class board:
         ladder_array=[]
         a.insert(0,(30,994,994))
         floor_array.insert(0,(30,994,994))
-        #print llm
+        #print(llm)
         b=[(690,850,35,144),(900,710,35,140),(700,540,35,170),(240,540,35,170),(340,450,35,90),(625,350,35,190),(500,200,35,150),(900,200,35,150)]
         for ladder in b:
             ladder_array.append(pygame.Rect(ladder[0],ladder[1],ladder[2],ladder[3]))

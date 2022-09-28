@@ -19,8 +19,8 @@ BLUE=(0,0,255)
 clock=pygame.time.Clock()
 x=board()
 border_array,floor_array,ladder_array,floor_mainarray=x.construct(screen,screen_width,screen_height )
-#print border_array
-#print floor_array
+#print(border_array)
+#print(floor_array)
 mario=player(0,0)
 operator=control()
 coin_array=operator.coins(floor_mainarray,screen_width)
@@ -38,7 +38,7 @@ def success_screen():
     return
 def refresh():
     if mario.success==1:
-        #print 'devudu karuninchadu'
+        #print('devudu karuninchadu')
         success_screen()
     elif mario.lives:
         x.refresh(screen,border_array,floor_array,ladder_array)
@@ -83,7 +83,7 @@ while 1: #the main loop
                 mario.y-=mario.speedy
                 break
     elif key[K_DOWN]:
-        #print 'in down'
+        #print('in down')
         for ladder in ladder_array:
             if mario.x >=ladder[0] and mario.x + mario.width <=ladder[0] +ladder[2] and mario.y+mario.height < ladder[1]+ladder[3] and  mario.y+mario.height >= ladder[1]:
                 mario.ladder=1
@@ -99,7 +99,7 @@ while 1: #the main loop
             mario.running=1
             mario.x-=mario.speedx
     elif key[K_RIGHT]:
-        #print 'in right'
+        #print('in right')
         mario.ladder_set(ladder_array)
         mario.check_on_the_floor(floor_mainarray)
         if mario.on_the_floor:
